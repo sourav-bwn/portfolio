@@ -2,8 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SOURAV — Architect of Futures</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#020408">
+<meta name="description" content="Portfolio of Sourav - Architect of Futures">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23020408' stroke='%2300D4FF' stroke-width='3'/><text x='50' y='60' text-anchor='middle' fill='%2300D4FF' font-family='sans-serif' font-size='30'>S</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Syne:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -25,6 +30,30 @@ body {
   font-family: 'Syne', sans-serif;
   overflow-x: hidden;
   cursor: none;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* App-like mobile styles */
+@media (max-width: 768px) {
+  body {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Hide cursor on touch devices */
+  #cursor, #cursor-trail {
+    display: none;
+  }
+  
+  body {
+    cursor: auto;
+  }
 }
 
 /* CUSTOM CURSOR */
@@ -436,11 +465,68 @@ nav {
 }
 
 @media (max-width:768px) {
-  nav { padding:1.2rem 1.5rem; }
-  .nav-links { gap:1.5rem; }
-  #about { grid-template-columns:1fr; gap:3rem; padding:5rem 1.5rem; }
-  #skills,#projects,#contact { padding:5rem 1.5rem; }
-  .portrait-wrapper { order:-1; }
+  html {
+    font-size: 16px;
+  }
+  
+  nav { 
+    padding: 1rem 1.2rem; 
+    padding-top: max(1rem, env(safe-area-inset-top));
+  }
+  .nav-logo { font-size: 0.85rem; letter-spacing: 0.25em; }
+  .nav-links { gap: 1.2rem; }
+  .nav-links a { font-size: 0.6rem; }
+  
+  #about { 
+    grid-template-columns: 1fr; 
+    gap: 2.5rem; 
+    padding: 4rem 1.2rem;
+  }
+  
+  #skills, #projects, #contact { 
+    padding: 4rem 1.2rem; 
+  }
+  
+  .portrait-wrapper { order: -1; }
+  
+  .hero-name {
+    font-size: 2.5rem;
+    letter-spacing: 0.2em;
+  }
+  
+  .hero-tagline {
+    font-size: 0.55rem;
+  }
+  
+  .typewriter-wrap {
+    max-width: 90%;
+  }
+  
+  .typewriter {
+    font-size: 0.85rem;
+  }
+  
+  .section-title {
+    font-size: 1.4rem;
+  }
+  
+  .skill-pill {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.5rem;
+  }
+  
+  .project-card {
+    padding: 1.5rem;
+  }
+  
+  .contact-link {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.55rem;
+  }
+  
+  .drag-hint {
+    display: none;
+  }
 }
 </style>
 </head>
@@ -930,6 +1016,11 @@ const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
 },{threshold:0.1});
 reveals.forEach(r=>obs.observe(r));
+
+// Register Service Worker for PWA
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+}
 </script>
 </body>
 </html>
