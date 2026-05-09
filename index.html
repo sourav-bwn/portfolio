@@ -815,11 +815,14 @@ function updateGlobeTooltip(){
 function isMouseInGlobe(x, y) {
   const dx = x - GCX;
   const dy = y - GCY;
-  return Math.sqrt(dx*dx + dy*dy) <= GR;
+  return Math.sqrt(dx*dx + dy*dy) <= GR * 1.15;
 }
 
+let mouseStartedInGlobe = false;
+
 gc.addEventListener('mousedown',e=>{
-  if (isMouseInGlobe(e.clientX, e.clientY)) {
+  mouseStartedInGlobe = isMouseInGlobe(e.clientX, e.clientY);
+  if (mouseStartedInGlobe) {
     isDragging=true; lastDX=e.clientX; lastDY=e.clientY;
     velX=0; velY=0;
   }
@@ -829,32 +832,40 @@ window.addEventListener('mousemove',e=>{
   const rect=gc.getBoundingClientRect();
   globeMouseX=e.clientX-rect.left;
   globeMouseY=e.clientY-rect.top;
-  if(!isDragging) return;
+  if(!mouseStartedInGlobe || !isDragging) return;
   const dx=e.clientX-lastDX, dy=e.clientY-lastDY;
   velY=dx*0.007; velX=-dy*0.007;
   rotY+=dx*0.007; rotX-=dy*0.007;
   rotX=Math.max(-1,Math.min(1,rotX));
   lastDX=e.clientX; lastDY=e.clientY;
 });
-window.addEventListener('mouseup',()=>{ isDragging=false; });
+window.addEventListener('mouseup',()=>{ 
+  isDragging=false; 
+  mouseStartedInGlobe = false;
+});
 
 // Touch - only rotate when touching inside globe
 function isTouchInGlobe(x, y) {
   const dx = x - GCX;
   const dy = y - GCY;
-  return Math.sqrt(dx*dx + dy*dy) <= GR;
+  const dist = Math.sqrt(dx*dx + dy*dy);
+  return dist <= GR * 1.15;
 }
+
+let touchStartedInGlobe = false;
 
 gc.addEventListener('touchstart',e=>{
   const touch = e.touches[0];
-  if (isTouchInGlobe(touch.clientX, touch.clientY)) {
+  touchStartedInGlobe = isTouchInGlobe(touch.clientX, touch.clientY);
+  if (touchStartedInGlobe) {
     e.preventDefault();
     isDragging=true; lastDX=touch.clientX; lastDY=touch.clientY;
     velX=0; velY=0;
   }
-},{passive:false});
+},{passive: false});
+
 gc.addEventListener('touchmove',e=>{
-  if (!isDragging) return;
+  if (!touchStartedInGlobe || !isDragging) return;
   e.preventDefault();
   const touch = e.touches[0];
   const dx=touch.clientX-lastDX, dy=touch.clientY-lastDY;
@@ -865,8 +876,12 @@ gc.addEventListener('touchmove',e=>{
   const rect=gc.getBoundingClientRect();
   globeMouseX=touch.clientX-rect.left;
   globeMouseY=touch.clientY-rect.top;
-},{passive:false});
-gc.addEventListener('touchend',()=>{ isDragging=false; });
+},{passive: false});
+
+gc.addEventListener('touchend',()=>{ 
+  isDragging=false; 
+  touchStartedInGlobe = false;
+});
 
 // ══════════════════════════════════════════════
 // MAIN LOOP
