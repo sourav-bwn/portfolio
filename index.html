@@ -128,10 +128,10 @@ nav {
   cursor: grab;
 }
 
-/* Key Skills label - positioned below SYSTEM INITIALIZED */
+/* Key Skills label - positioned top left of globe */
 .key-skills-label {
   position: absolute;
-  top: 18%;
+  top: 22%;
   left: 5%;
   font-family: 'Orbitron', sans-serif;
   font-size: 0.65rem;
@@ -142,18 +142,6 @@ nav {
   text-shadow: 0 0 15px var(--blue), 0 0 30px rgba(0,212,255,0.5);
 }
 
-.system-tag {
-  position: absolute;
-  top: 10%;
-  left: 5%;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.7rem; letter-spacing: 0.5em;
-  color: #a78bfa;
-  text-transform: uppercase;
-  text-shadow: 0 0 25px rgba(167,139,250,1), 0 0 50px rgba(167,139,250,0.5);
-  z-index: 10;
-}
-
 .hero-top {
   position: relative;
   z-index: 10;
@@ -162,6 +150,7 @@ nav {
   padding-top: 2rem;
   padding-bottom: 30vh;
 }
+#globe-canvas:active { cursor: grabbing; }
 
 /* Bottom section - Typewriter & CTA */
 .hero-bottom {
@@ -173,6 +162,14 @@ nav {
   padding-bottom: 4rem;
 }
 
+.system-tag {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.8rem; letter-spacing: 0.6em;
+  color: #a78bfa;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 25px rgba(167,139,250,1), 0 0 50px rgba(167,139,250,0.5);
+}
 @keyframes fadeUp {
   from { opacity:0; transform:translateY(20px); }
   to   { opacity:1; transform:none; }
@@ -584,6 +581,7 @@ nav {
 
   <!-- Top section - Header info -->
   <div class="hero-top">
+    <div class="system-tag">◈ SYSTEM INITIALIZED</div>
     <h1 class="hero-name">SOURAV</h1>
     <div class="hero-tagline">ARCHITECT OF FUTURES · AI DREAMER · VISUAL BUILDER</div>
   </div>
