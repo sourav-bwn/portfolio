@@ -80,7 +80,6 @@ nav{
   font-family:'Orbitron',sans-serif;font-size:0.62rem;letter-spacing:0.28em;
   text-transform:uppercase;text-decoration:none;
   position:relative;overflow:hidden;transition:color 0.4s;cursor:none;
-  opacity:0;animation:up 0.9s ease forwards 1.7s;
 }
 .cta-btn::before{content:'';position:absolute;inset:0;background:#00D4FF;
   transform:translateX(-101%);transition:transform 0.4s ease;z-index:-1;}
@@ -137,7 +136,7 @@ nav{
 
 /* Globe canvas wrapper */
 .globe-wrap{
-  width:480px;height:480px;flex-shrink:0;
+  width:380px;height:380px;flex-shrink:0;
   position:relative;
 }
 #gc{width:100%;height:100%;display:block;touch-action:none;}
@@ -354,7 +353,7 @@ nav{
   .ks-header{width:100%;text-align:center;margin-bottom:4px;font-size:0.52rem;}
   .ks-rule{display:none;}
   .ks-item .kslbl{font-size:0.4rem;}
-  .globe-wrap{width:88vw;height:88vw;max-width:420px;max-height:420px;}
+  .globe-wrap{width:85vw;height:85vw;max-width:360px;max-height:360px;}
   .globe-right{display:none;}
 
   #s-type{padding:14px 1.5rem 40px;}
@@ -381,7 +380,7 @@ nav{
   .sys-tag{font-size:0.48rem;letter-spacing:0.28em;}
   .cta-btn{font-size:0.54rem;padding:0.72rem 1.6rem;letter-spacing:0.18em;}
 
-  .globe-wrap{width:93vw;height:93vw;max-width:340px;max-height:340px;}
+  .globe-wrap{width:90vw;height:90vw;max-width:300px;max-height:300px;}
   .ks-item .kslbl{font-size:0.34rem;letter-spacing:0.08em;}
   .ks-item .ksdot{width:5px;height:5px;}
   .ks-header{font-size:0.44rem;}
@@ -445,7 +444,6 @@ nav{
     <div class="sys-tag">◈ System Initialized</div>
     <h1 class="hero-name">SOURAV</h1>
     <div class="hero-tag">Architect of Futures · <span>AI Dreamer</span> · Visual Builder</div>
-    <a href="#about" class="cta-btn">Enter the System</a>
   </div>
 </section>
 
@@ -455,7 +453,6 @@ nav{
   <div class="key-skills" id="ksList">
     <div class="ks-header">◈ KEY SKILLS</div>
     <div class="ks-rule"></div>
-    <!-- items injected by JS -->
   </div>
 
   <!-- Globe -->
@@ -463,7 +460,6 @@ nav{
     <canvas id="gc"></canvas>
   </div>
 
-  <!-- Right spacer -->
   <div class="globe-right"></div>
 </section>
 
@@ -477,6 +473,9 @@ nav{
 <!-- ══ SECTION 3: TYPEWRITER ══ -->
 <section id="s-type">
   <p class="typer" id="tw"><span class="blk"></span></p>
+  <div style="margin-top:2rem;">
+    <a href="#about" class="cta-btn">Enter the System</a>
+  </div>
 </section>
 <div class="scroll-hint">
   <div class="sl"></div>
@@ -573,9 +572,6 @@ nav{
 </section>
 
 <script>
-/* ════════════════════════════
-   CURSOR
-════════════════════════════ */
 const cur=document.getElementById('cur');
 const cur2=document.getElementById('cur2');
 let mx=0,my=0,t2x=0,t2y=0;
@@ -589,9 +585,6 @@ document.addEventListener('mousemove',e=>{
   requestAnimationFrame(loop2);
 })();
 
-/* ════════════════════════════
-   BG STARS (behind name section only)
-════════════════════════════ */
 const bgC=document.getElementById('bg-canvas');
 const bgX=bgC.getContext('2d');
 const sTop=document.getElementById('s-top');
@@ -613,9 +606,6 @@ function drawBg(){
   });
 }
 
-/* ════════════════════════════
-   SKILLS DATA
-════════════════════════════ */
 const SK=[
   {l:'AI Systems',     tag:'BUILDER', c:'#00D4FF',lat:45, lon:0,
    d:'Autonomous agents, intelligent systems that think, act and evolve.'},
@@ -643,7 +633,6 @@ const SK=[
    d:'Standing ahead of the present, imagining ecosystems that do not exist.'},
 ];
 
-/* Build KEY SKILLS sidebar */
 const ksList=document.getElementById('ksList');
 SK.forEach((sk,i)=>{
   const el=document.createElement('div');
@@ -653,9 +642,6 @@ SK.forEach((sk,i)=>{
   ksList.appendChild(el);
 });
 
-/* ════════════════════════════
-   GLOBE
-════════════════════════════ */
 const gcEl=document.getElementById('gc');
 const gx=gcEl.getContext('2d');
 const gWrap=document.getElementById('gWrap');
@@ -669,7 +655,7 @@ function szGlobe(){
 }
 szGlobe();window.addEventListener('resize',szGlobe);
 
-let rX=0.22,rY=0,vX=0,vY=0.0004; /* very slow auto drift */
+let rX=0.22,rY=0,vX=0,vY=0.0004;
 let dragging=false,lx=0,ly=0;
 let gmx=-999,gmy=-999,hov=null;
 
@@ -691,7 +677,6 @@ function inGlobe(px,py){
 function drawGlobe(){
   gx.clearRect(0,0,GW,GH);
 
-  /* atmosphere */
   const atm=gx.createRadialGradient(GCX,GCY,GR*0.65,GCX,GCY,GR*1.38);
   atm.addColorStop(0,'rgba(0,212,255,0.05)');
   atm.addColorStop(0.55,'rgba(123,97,255,0.09)');
@@ -699,7 +684,6 @@ function drawGlobe(){
   gx.beginPath();gx.arc(GCX,GCY,GR*1.38,0,Math.PI*2);
   gx.fillStyle=atm;gx.fill();
 
-  /* sphere base */
   const sph=gx.createRadialGradient(GCX-GR*0.3,GCY-GR*0.3,GR*0.06,GCX,GCY,GR);
   sph.addColorStop(0,'rgba(16,36,65,0.97)');
   sph.addColorStop(0.5,'rgba(5,13,26,0.99)');
@@ -707,7 +691,6 @@ function drawGlobe(){
   gx.beginPath();gx.arc(GCX,GCY,GR,0,Math.PI*2);
   gx.fillStyle=sph;gx.fill();
 
-  /* latitude lines — brighter */
   for(let lat=-75;lat<=75;lat+=15){
     gx.beginPath();let f=true;
     for(let lon=-180;lon<=180;lon+=3){
@@ -722,7 +705,6 @@ function drawGlobe(){
     gx.stroke();
   }
 
-  /* longitude lines */
   for(let lon=-165;lon<180;lon+=15){
     gx.beginPath();let f=true;
     for(let lat=-90;lat<=90;lat+=3){
@@ -736,7 +718,6 @@ function drawGlobe(){
     gx.stroke();
   }
 
-  /* rim glow — makes it 3D */
   const rim=gx.createRadialGradient(GCX,GCY,GR*0.75,GCX,GCY,GR);
   rim.addColorStop(0,'rgba(0,0,0,0)');
   rim.addColorStop(0.7,'rgba(0,212,255,0.07)');
@@ -744,14 +725,12 @@ function drawGlobe(){
   gx.beginPath();gx.arc(GCX,GCY,GR,0,Math.PI*2);
   gx.fillStyle=rim;gx.fill();
 
-  /* specular */
   const spec=gx.createRadialGradient(GCX-GR*0.33,GCY-GR*0.33,0,GCX-GR*0.33,GCY-GR*0.33,GR*0.44);
   spec.addColorStop(0,'rgba(255,255,255,0.1)');
   spec.addColorStop(1,'rgba(0,0,0,0)');
   gx.beginPath();gx.arc(GCX,GCY,GR,0,Math.PI*2);
   gx.fillStyle=spec;gx.fill();
 
-  /* skill nodes */
   hov=null;
   const t=(Date.now()%2800)/2800;
   const t2=((Date.now()+1400)%2800)/2800;
@@ -765,25 +744,21 @@ function drawGlobe(){
     const isH=inGlobe(gmx,gmy)&&Math.sqrt((gmx-sx)**2+(gmy-sy)**2)<22;
     if(isH) hov={...sk,sx,sy};
 
-    /* pulse 1 */
     const pr=8+t*20,pa=alpha*(1-t)*0.55;
     gx.beginPath();gx.arc(sx,sy,pr,0,Math.PI*2);
     gx.strokeStyle=sk.c+Math.round(pa*255).toString(16).padStart(2,'0');
     gx.lineWidth=1.1;gx.stroke();
-    /* pulse 2 offset */
     const pr2=6+t2*14,pa2=alpha*(1-t2)*0.38;
     gx.beginPath();gx.arc(sx,sy,pr2,0,Math.PI*2);
     gx.strokeStyle=sk.c+Math.round(pa2*255).toString(16).padStart(2,'0');
     gx.lineWidth=0.7;gx.stroke();
 
-    /* dot */
     const nr=isH?11:7;
     gx.beginPath();gx.arc(sx,sy,nr,0,Math.PI*2);
     gx.fillStyle=sk.c+Math.round(alpha*255).toString(16).padStart(2,'0');
     gx.shadowColor=sk.c;gx.shadowBlur=isH?26:11;
     gx.fill();gx.shadowBlur=0;
 
-    /* label */
     if(alpha>0.3){
       gx.font=`${isH?'700':'500'} ${isH?'11':'10'}px Orbitron,monospace`;
       gx.fillStyle=`rgba(224,238,255,${alpha*(isH?1:0.68)})`;
@@ -791,7 +766,6 @@ function drawGlobe(){
       gx.fillText(sk.l,sx,sy-15);
     }
 
-    /* sidebar highlight */
     const ksi=document.getElementById('ksi'+i);
     if(ksi){
       if(alpha>0.55) ksi.classList.add('lit');
@@ -800,7 +774,6 @@ function drawGlobe(){
   });
 }
 
-/* tooltip */
 const gtt=document.getElementById('gtt');
 const gttTag=document.getElementById('gtt-tag');
 const gttName=document.getElementById('gtt-name');
@@ -824,7 +797,6 @@ function updateTip(){
   }
 }
 
-/* drag — only inside globe */
 gcEl.addEventListener('mousedown',e=>{
   const rect=gcEl.getBoundingClientRect();
   if(!inGlobe(e.clientX-rect.left,e.clientY-rect.top)) return;
@@ -863,15 +835,12 @@ gcEl.addEventListener('touchmove',e=>{
 },{passive:false});
 gcEl.addEventListener('touchend',()=>{dragging=false;});
 
-/* ════════════════════════════
-   MAIN LOOP
-════════════════════════════ */
 function mainLoop(){
   drawBg();
   if(!dragging){
     rY+=vY;rX+=vX;
     vX*=0.93;
-    vY=vY*0.997+0.00025; /* barely perceptible drift */
+    vY=vY*0.997+0.00025;
     rX=Math.max(-0.88,Math.min(0.88,rX));
   }
   drawGlobe();
@@ -880,9 +849,6 @@ function mainLoop(){
 }
 mainLoop();
 
-/* ════════════════════════════
-   TYPEWRITER
-════════════════════════════ */
 const phrases=[
   'Most people use technology. Sourav imagines what it could become.',
   'A website becomes an OS. An assistant becomes an entity.',
@@ -902,9 +868,6 @@ function type(){
 }
 setTimeout(type,2600);
 
-/* ════════════════════════════
-   HAMBURGER MENU
-════════════════════════════ */
 const ham=document.getElementById('ham');
 const mMenu=document.getElementById('mMenu');
 ham.addEventListener('click',()=>{
