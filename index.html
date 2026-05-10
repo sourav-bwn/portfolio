@@ -15,6 +15,15 @@ body{
   font-family:'Syne',sans-serif;
   overflow-x:hidden;
   cursor:none;
+  max-width:500px;
+  margin:0 auto;
+  box-shadow:0 0 80px rgba(0,212,255,0.08);
+}
+@media (min-width:501px){
+  body{
+    border-left:1px solid rgba(0,212,255,0.08);
+    border-right:1px solid rgba(0,212,255,0.08);
+  }
 }
 
 /* ── CURSOR ── */
@@ -669,7 +678,7 @@ function szGlobe(){
 }
 szGlobe();window.addEventListener('resize',szGlobe);
 
-let rX=0.22,rY=0,vX=0,vY=0.0004; /* very slow auto drift */
+let rX=0.22,rY=0,vX=0,vY=0.00015; /* very slow auto drift */
 let dragging=false,lx=0,ly=0;
 let gmx=-999,gmy=-999,hov=null;
 
@@ -871,7 +880,7 @@ function mainLoop(){
   if(!dragging){
     rY+=vY;rX+=vX;
     vX*=0.93;
-    vY=vY*0.997+0.00025; /* barely perceptible drift */
+    vY=vY*0.998+0.00008; /* barely perceptible drift */
     rX=Math.max(-0.88,Math.min(0.88,rX));
   }
   drawGlobe();
