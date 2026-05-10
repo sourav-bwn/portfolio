@@ -143,20 +143,30 @@ nav {
 }
 #globe-canvas:active { cursor: grabbing; }
 
-/* Text overlay on top of globe */
-.hero-content {
-  position: relative; z-index: 5;
+/* Top section - Header info */
+.hero-top {
+  position: relative;
+  z-index: 5;
   pointer-events: none;
-  display: flex; flex-direction: column;
-  align-items: center;
-  padding-top: 55vh; /* push text to bottom half */
+  text-align: center;
+  padding-top: 3rem;
+}
+
+/* Bottom section - Typewriter & CTA */
+.hero-bottom {
+  position: relative;
+  z-index: 5;
+  pointer-events: none;
+  text-align: center;
+  margin-top: auto;
+  padding-bottom: 4rem;
 }
 
 .system-tag {
   font-family: 'Orbitron', sans-serif;
-  font-size: 0.6rem; letter-spacing: 0.45em;
+  font-size: 0.55rem; letter-spacing: 0.45em;
   color: var(--violet); text-transform: uppercase;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.6rem;
   opacity: 0; animation: fadeUp 1s ease forwards 0.5s;
   text-shadow: var(--glow-violet);
 }
@@ -167,13 +177,14 @@ nav {
 
 .hero-name {
   font-family: 'Orbitron', sans-serif;
-  font-size: clamp(2.5rem, 8vw, 6rem);
-  font-weight: 900; letter-spacing: 0.3em;
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 900; letter-spacing: 0.25em;
   background: linear-gradient(135deg, #fff 0%, var(--blue) 50%, var(--violet) 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
   opacity:0; animation: nameReveal 1.5s cubic-bezier(0.16,1,0.3,1) forwards 0.8s;
   filter: drop-shadow(0 0 30px rgba(0,212,255,0.4));
+  margin: 0.3rem 0;
 }
 @keyframes nameReveal {
   from { opacity:0; transform:translateY(30px) scale(0.9); filter:blur(10px); }
@@ -181,14 +192,13 @@ nav {
 }
 
 .hero-tagline {
-  font-size: 0.65rem; letter-spacing:0.3em; text-transform:uppercase;
-  color: rgba(224,238,255,0.4); margin: 0.8rem 0 1.5rem;
-  opacity:0; animation: fadeUp 1s ease forwards 1.5s;
+  font-size: 0.5rem; letter-spacing:0.25em; text-transform:uppercase;
+  color: rgba(224,238,255,0.35);
+  opacity:0; animation: fadeUp 1s ease forwards 1.2s;
 }
-.hero-tagline span { color: var(--violet); }
 
 .typewriter-wrap {
-  max-width: 520px; margin:0 auto 2rem;
+  max-width: 520px; margin:0 auto 1.5rem;
   opacity:0; animation: fadeUp 1s ease forwards 1.8s;
 }
 .typewriter {
@@ -569,10 +579,18 @@ nav {
 
   <div class="drag-hint">◈ DRAG THE GLOBE · HOVER NODES</div>
 
-  <div class="hero-content">
-    <div class="system-tag">◈ System Initialized</div>
+  <!-- Top section - Header info -->
+  <div class="hero-top">
+    <div class="system-tag">◈ SYSTEM INITIALIZED</div>
     <h1 class="hero-name">SOURAV</h1>
-    <div class="hero-tagline">Architect of Futures · <span>AI Dreamer</span> · Visual Builder</div>
+    <div class="hero-tagline">ARCHITECT OF FUTURES · AI DREAMER · VISUAL BUILDER</div>
+  </div>
+
+  <!-- Middle section - Globe -->
+  <!-- Globe is already rendered by canvas -->
+
+  <!-- Bottom section - Typewriter & CTA -->
+  <div class="hero-bottom">
     <div class="typewriter-wrap">
       <p class="typewriter" id="typewriter"><span class="blink"></span></p>
     </div>
@@ -779,8 +797,8 @@ let hoveredSkill=null;
 function resizeGlobe(){
   GW=gc.width=hero.offsetWidth;
   GH=gc.height=hero.offsetHeight;
-  GCX=GW/2; GCY=GH*0.42;
-  GR=Math.min(GW,GH)*0.28;
+  GCX=GW/2; GCY=GH*0.52;
+  GR=Math.min(GW,GH)*0.32;
 }
 resizeGlobe();
 window.addEventListener('resize', resizeGlobe);
