@@ -127,6 +127,20 @@ nav {
   z-index: 1;
   cursor: grab;
 }
+
+/* Key Skills label above globe */
+.key-skills-label {
+  position: absolute;
+  top: 12%;
+  left: 4rem;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.35em;
+  color: var(--blue);
+  opacity: 0.7;
+  z-index: 5;
+  text-shadow: 0 0 10px rgba(0,212,255,0.5);
+}
 #globe-canvas:active { cursor: grabbing; }
 
 /* Text overlay on top of globe */
@@ -550,6 +564,8 @@ nav {
 <section id="hero">
   <canvas id="bg-canvas"></canvas>
   <canvas id="globe-canvas"></canvas>
+  
+  <div class="key-skills-label">◈ KEY SKILLS</div>
 
   <div class="drag-hint">◈ DRAG THE GLOBE · HOVER NODES</div>
 
@@ -755,7 +771,7 @@ const SKILLS = [
 ];
 
 let GW, GH, GCX, GCY, GR;
-let rotX=0.25, rotY=0, velX=0, velY=0.004;
+let rotX=0.25, rotY=0, velX=0, velY=0.0015;
 let isDragging=false, lastDX=0, lastDY=0;
 let globeMouseX=-999, globeMouseY=-999;
 let hoveredSkill=null;
@@ -814,8 +830,8 @@ function drawGlobe(){
       const sx=GCX+r.x, sy=GCY-r.y;
       if(first){gx.moveTo(sx,sy);first=false;}else gx.lineTo(sx,sy);
     }
-    gx.strokeStyle='rgba(0,212,255,0.07)';
-    gx.lineWidth=0.5; gx.stroke();
+    gx.strokeStyle='rgba(0,212,255,0.18)';
+    gx.lineWidth=0.8; gx.stroke();
   }
   for(let lon=-180;lon<180;lon+=20){
     gx.beginPath(); let first=true;
@@ -825,8 +841,8 @@ function drawGlobe(){
       const sx=GCX+r.x, sy=GCY-r.y;
       if(first){gx.moveTo(sx,sy);first=false;}else gx.lineTo(sx,sy);
     }
-    gx.strokeStyle='rgba(123,97,255,0.05)';
-    gx.lineWidth=0.5; gx.stroke();
+    gx.strokeStyle='rgba(123,97,255,0.12)';
+    gx.lineWidth=0.8; gx.stroke();
   }
 
   // Rim
@@ -977,7 +993,7 @@ function loop(){
   if(!isDragging){
     rotY+=velY; rotX+=velX;
     velX*=0.95;
-    velY=velY*0.98+0.0008;
+    velY=velY*0.98+0.0003;
     rotX=Math.max(-1,Math.min(1,rotX));
   }
   drawGlobe();
