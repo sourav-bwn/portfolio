@@ -15,15 +15,6 @@ body{
   font-family:'Syne',sans-serif;
   overflow-x:hidden;
   cursor:none;
-  max-width:500px;
-  margin:0 auto;
-  box-shadow:0 0 80px rgba(0,212,255,0.08);
-}
-@media (min-width:501px){
-  body{
-    border-left:1px solid rgba(0,212,255,0.08);
-    border-right:1px solid rgba(0,212,255,0.08);
-  }
 }
 
 /* ── CURSOR ── */
@@ -54,7 +45,7 @@ nav{
 ══════════════════════════════════════════ */
 #s-top{
   position:relative;
-  padding:130px 2rem 20px;
+  padding:130px 2rem 50px;
   text-align:center;
   overflow:hidden;
 }
@@ -110,13 +101,6 @@ nav{
   align-items:flex-start;
   gap:0;
   position:relative;
-}
-
-/* CTA below globe */
-.globe-cta{
-  text-align:center;
-  padding:10px 0 30px;
-  opacity:0;animation:up 0.9s ease forwards 2s;
 }
 
 /* KEY SKILLS panel — left side, inline flow */
@@ -461,6 +445,7 @@ nav{
     <div class="sys-tag">◈ System Initialized</div>
     <h1 class="hero-name">SOURAV</h1>
     <div class="hero-tag">Architect of Futures · <span>AI Dreamer</span> · Visual Builder</div>
+    <a href="#about" class="cta-btn">Enter the System</a>
   </div>
 </section>
 
@@ -481,11 +466,6 @@ nav{
   <!-- Right spacer -->
   <div class="globe-right"></div>
 </section>
-
-<!-- CTA Button below Globe -->
-<div class="globe-cta">
-  <a href="#about" class="cta-btn">Enter the System</a>
-</div>
 
 <!-- Globe tooltip -->
 <div id="gtt">
@@ -641,25 +621,25 @@ const SK=[
    d:'Autonomous agents, intelligent systems that think, act and evolve.'},
   {l:'Visual Design',  tag:'ARTIST',  c:'#FF6B9D',lat:20, lon:60,
    d:'Aesthetics, atmosphere, interface beauty — design that feels powerful.'},
-  {l:'Creative Tech',  tag:'HYBRID',   c:'#7B61FF',lat:-20,lon:120,
+  {l:'Creative Tech',  tag:'HYBRID',  c:'#7B61FF',lat:-20,lon:120,
    d:'Blurring the boundary between software and personality.'},
-  {l:'Motion Design',  tag:'ARTIST',   c:'#FFB347',lat:55, lon:-80,
+  {l:'Motion Design',  tag:'ARTIST',  c:'#FFB347',lat:55, lon:-80,
    d:'Everything should breathe, pulse, feel alive — motion is meaning.'},
-  {l:'001 Code',       tag:'VISION',   c:'#00FF9F',lat:-40,lon:-60,
+  {l:'001 Code',       tag:'VISION',  c:'#00FF9F',lat:-40,lon:-60,
    d:'Proprietary cinematic grading born because no preset matched the mood.'},
-  {l:'Frontend Arch',  tag:'BUILDER',  c:'#00D4FF',lat:10, lon:-140,
+  {l:'Frontend Arch',  tag:'BUILDER', c:'#00D4FF',lat:10, lon:-140,
    d:'Immersive operating systems masquerading as websites.'},
-  {l:'Storytelling',   tag:'CREATOR',  c:'#FF6B9D',lat:-55,lon:40,
+  {l:'Storytelling',   tag:'CREATOR', c:'#FF6B9D',lat:-55,lon:40,
    d:'Audience psychology, brand identity — intelligence needs aesthetic gravity.'},
-  {l:'Prompt Eng.',    tag:'AI',       c:'#7B61FF',lat:70, lon:150,
+  {l:'Prompt Eng.',    tag:'AI',      c:'#7B61FF',lat:70, lon:150,
    d:'Talking to machines like they understand the future being built.'},
-  {l:'Brand Identity', tag:'CREATOR',  c:'#FFB347',lat:-10,lon:-30,
+  {l:'Brand Identity', tag:'CREATOR', c:'#FFB347',lat:-10,lon:-30,
    d:'Creating something distinctive enough that people remember it.'},
-  {l:'Systems Think.', tag:'BUILDER',  c:'#00FF9F',lat:35, lon:-170,
+  {l:'Systems Think.', tag:'BUILDER', c:'#00FF9F',lat:35, lon:-170,
    d:'A website becomes an OS. An assistant becomes an entity.'},
-  {l:'Cinematic Eye',  tag:'ARTIST',   c:'#FF6B9D',lat:-30,lon:170,
+  {l:'Cinematic Eye',  tag:'ARTIST',  c:'#FF6B9D',lat:-30,lon:170,
    d:'Color tones, compositions — noticing what others walk past.'},
-  {l:'Future Vision',  tag:'VISION',   c:'#00D4FF',lat:75, lon:-30,
+  {l:'Future Vision',  tag:'VISION',  c:'#00D4FF',lat:75, lon:-30,
    d:'Standing ahead of the present, imagining ecosystems that do not exist.'},
 ];
 
@@ -689,7 +669,7 @@ function szGlobe(){
 }
 szGlobe();window.addEventListener('resize',szGlobe);
 
-let rX=0.22,rY=0,vX=0,vY=0.00015; /* very slow auto drift */
+let rX=0.22,rY=0,vX=0,vY=0.0004; /* very slow auto drift */
 let dragging=false,lx=0,ly=0;
 let gmx=-999,gmy=-999,hov=null;
 
@@ -891,7 +871,7 @@ function mainLoop(){
   if(!dragging){
     rY+=vY;rX+=vX;
     vX*=0.93;
-    vY=vY*0.998+0.00008; /* barely perceptible drift */
+    vY=vY*0.997+0.00025; /* barely perceptible drift */
     rX=Math.max(-0.88,Math.min(0.88,rX));
   }
   drawGlobe();
