@@ -218,8 +218,17 @@ nav{
   width:80px;height:80px;border-radius:50%;
   border:1px solid rgba(0,212,255,0.35);
   margin:1rem auto;display:flex;align-items:center;justify-content:center;
-  font-size:2.2rem;color:rgba(0,212,255,0.5);
-  font-family:'Orbitron',sans-serif;font-weight:900;
+  overflow:hidden;position:relative;
+}
+.p-avatar img{
+  width:100%;height:100%;object-fit:cover;
+}
+.avatar-corner-text{
+  position:absolute;top:0;left:0;
+  background:#020408;border:1px solid rgba(0,212,255,0.2);
+  padding:0.2rem 0.4rem;font-family:'Orbitron',sans-serif;
+  font-size:0.4rem;letter-spacing:0.1em;color:#00D4FF;
+  line-height:1.2;pointer-events:none;
 }
 .p-scan{position:absolute;inset:0;
   background:repeating-linear-gradient(transparent,transparent 2px,
@@ -487,8 +496,10 @@ nav{
 <section id="about">
 <div class="portrait rv">
   <div class="portrait-inner">
-    [ PORTRAIT · CLASSIFIED ]
-    <div class="p-avatar"><img src="https://www.image2url.com/r2/default/images/1778417963874-e645c9c0-5e18-4859-ac9b-f7e95dcd1dee.png" alt="image" /></div>
+    <div class="p-avatar">
+      <img src="https://www.image2url.com/r2/default/images/1778417963874-e645c9c0-5e18-4859-ac9b-f7e95dcd1dee.png" alt="image" />
+      <span class="avatar-corner-text">[ PORTRAIT · CLASSIFIED ]</span>
+    </div>
     SOURAV · ARCHITECT
   </div>
 </div>
