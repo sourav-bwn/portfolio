@@ -2,13 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#020408">
-<meta name="description" content="Portfolio of Sourav - Architect of Futures">
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23020408' stroke='%2300D4FF' stroke-width='3'/><text x='50' y='60' text-anchor='middle' fill='%2300D4FF' font-family='sans-serif' font-size='30'>S</text></svg>">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOURAV — Architect of Futures</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Syne:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -30,30 +25,6 @@ body {
   font-family: 'Syne', sans-serif;
   overflow-x: hidden;
   cursor: none;
-  min-height: 100vh;
-  min-height: 100dvh;
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
-  padding-left: env(safe-area-inset-left);
-  padding-right: env(safe-area-inset-right);
-}
-
-/* App-like mobile styles */
-@media (max-width: 768px) {
-  body {
-    -webkit-user-select: none;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-  }
-  
-  /* Hide cursor on touch devices */
-  #cursor, #cursor-trail {
-    display: none;
-  }
-  
-  body {
-    cursor: auto;
-  }
 }
 
 /* CUSTOM CURSOR */
@@ -127,52 +98,25 @@ nav {
   z-index: 1;
   cursor: grab;
 }
+#globe-canvas:active { cursor: grabbing; }
 
-/* Key Skills label - positioned below SYSTEM INITIALIZED */
-.key-skills-label {
-  position: absolute;
-  top: 18%;
-  left: 5%;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.65rem;
-  letter-spacing: 0.4em;
-  color: var(--blue);
-  opacity: 1;
-  z-index: 5;
-  text-shadow: 0 0 15px var(--blue), 0 0 30px rgba(0,212,255,0.5);
+/* Text overlay on top of globe */
+.hero-content {
+  position: relative; z-index: 5;
+  pointer-events: none;
+  display: flex; flex-direction: column;
+  align-items: center;
+  padding-top: 55vh; /* push text to bottom half */
 }
 
 .system-tag {
-  position: absolute;
-  top: 10%;
-  left: 5%;
   font-family: 'Orbitron', sans-serif;
-  font-size: 0.7rem; letter-spacing: 0.5em;
-  color: #a78bfa;
-  text-transform: uppercase;
-  text-shadow: 0 0 25px rgba(167,139,250,1), 0 0 50px rgba(167,139,250,0.5);
-  z-index: 10;
+  font-size: 0.6rem; letter-spacing: 0.45em;
+  color: var(--violet); text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  opacity: 0; animation: fadeUp 1s ease forwards 0.5s;
+  text-shadow: var(--glow-violet);
 }
-
-.hero-top {
-  position: relative;
-  z-index: 10;
-  pointer-events: none;
-  text-align: center;
-  padding-top: 2rem;
-  padding-bottom: 30vh;
-}
-
-/* Bottom section - Typewriter & CTA */
-.hero-bottom {
-  position: relative;
-  z-index: 10;
-  pointer-events: none;
-  text-align: center;
-  margin-top: -20vh;
-  padding-bottom: 4rem;
-}
-
 @keyframes fadeUp {
   from { opacity:0; transform:translateY(20px); }
   to   { opacity:1; transform:none; }
@@ -180,14 +124,13 @@ nav {
 
 .hero-name {
   font-family: 'Orbitron', sans-serif;
-  font-size: clamp(2rem, 6vw, 4rem);
-  font-weight: 900; letter-spacing: 0.25em;
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  font-weight: 900; letter-spacing: 0.3em;
   background: linear-gradient(135deg, #fff 0%, var(--blue) 50%, var(--violet) 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
   opacity:0; animation: nameReveal 1.5s cubic-bezier(0.16,1,0.3,1) forwards 0.8s;
   filter: drop-shadow(0 0 30px rgba(0,212,255,0.4));
-  margin: 0.3rem 0;
 }
 @keyframes nameReveal {
   from { opacity:0; transform:translateY(30px) scale(0.9); filter:blur(10px); }
@@ -195,13 +138,14 @@ nav {
 }
 
 .hero-tagline {
-  font-size: 0.5rem; letter-spacing:0.25em; text-transform:uppercase;
-  color: rgba(224,238,255,0.35);
-  opacity:0; animation: fadeUp 1s ease forwards 1.2s;
+  font-size: 0.65rem; letter-spacing:0.3em; text-transform:uppercase;
+  color: rgba(224,238,255,0.4); margin: 0.8rem 0 1.5rem;
+  opacity:0; animation: fadeUp 1s ease forwards 1.5s;
 }
+.hero-tagline span { color: var(--violet); }
 
 .typewriter-wrap {
-  max-width: 520px; margin:0 auto 1.5rem;
+  max-width: 520px; margin:0 auto 2rem;
   opacity:0; animation: fadeUp 1s ease forwards 1.8s;
 }
 .typewriter {
@@ -492,68 +436,11 @@ nav {
 }
 
 @media (max-width:768px) {
-  html {
-    font-size: 16px;
-  }
-  
-  nav { 
-    padding: 1rem 1.2rem; 
-    padding-top: max(1rem, env(safe-area-inset-top));
-  }
-  .nav-logo { font-size: 0.85rem; letter-spacing: 0.25em; }
-  .nav-links { gap: 1.2rem; }
-  .nav-links a { font-size: 0.6rem; }
-  
-  #about { 
-    grid-template-columns: 1fr; 
-    gap: 2.5rem; 
-    padding: 4rem 1.2rem;
-  }
-  
-  #skills, #projects, #contact { 
-    padding: 4rem 1.2rem; 
-  }
-  
-  .portrait-wrapper { order: -1; }
-  
-  .hero-name {
-    font-size: 2.5rem;
-    letter-spacing: 0.2em;
-  }
-  
-  .hero-tagline {
-    font-size: 0.55rem;
-  }
-  
-  .typewriter-wrap {
-    max-width: 90%;
-  }
-  
-  .typewriter {
-    font-size: 0.85rem;
-  }
-  
-  .section-title {
-    font-size: 1.4rem;
-  }
-  
-  .skill-pill {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.5rem;
-  }
-  
-  .project-card {
-    padding: 1.5rem;
-  }
-  
-  .contact-link {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.55rem;
-  }
-  
-  .drag-hint {
-    display: none;
-  }
+  nav { padding:1.2rem 1.5rem; }
+  .nav-links { gap:1.5rem; }
+  #about { grid-template-columns:1fr; gap:3rem; padding:5rem 1.5rem; }
+  #skills,#projects,#contact { padding:5rem 1.5rem; }
+  .portrait-wrapper { order:-1; }
 }
 </style>
 </head>
@@ -577,22 +464,13 @@ nav {
 <section id="hero">
   <canvas id="bg-canvas"></canvas>
   <canvas id="globe-canvas"></canvas>
-  
-  <div class="key-skills-label">◈ KEY SKILLS</div>
 
   <div class="drag-hint">◈ DRAG THE GLOBE · HOVER NODES</div>
 
-  <!-- Top section - Header info -->
-  <div class="hero-top">
+  <div class="hero-content">
+    <div class="system-tag">◈ System Initialized</div>
     <h1 class="hero-name">SOURAV</h1>
-    <div class="hero-tagline">ARCHITECT OF FUTURES · AI DREAMER · VISUAL BUILDER</div>
-  </div>
-
-  <!-- Middle section - Globe -->
-  <!-- Globe is already rendered by canvas -->
-
-  <!-- Bottom section - Typewriter & CTA -->
-  <div class="hero-bottom">
+    <div class="hero-tagline">Architect of Futures · <span>AI Dreamer</span> · Visual Builder</div>
     <div class="typewriter-wrap">
       <p class="typewriter" id="typewriter"><span class="blink"></span></p>
     </div>
@@ -950,7 +828,6 @@ gc.addEventListener('mousedown',e=>{
   }
 });
 window.addEventListener('mousemove',e=>{
-  // Update globe mouse position
   const rect=gc.getBoundingClientRect();
   globeMouseX=e.clientX-rect.left;
   globeMouseY=e.clientY-rect.top;
@@ -1052,11 +929,6 @@ const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
 },{threshold:0.1});
 reveals.forEach(r=>obs.observe(r));
-
-// Register Service Worker for PWA
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js');
-}
 </script>
 </body>
 </html>
